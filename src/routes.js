@@ -29,6 +29,6 @@ routes.post('/positions', PositionController.store);
 routes.get('/positions', PositionController.index);
 routes.get('/positions/:uid', PositionController.show);
 routes.put('/positions/:uid', PositionController.update);
-routes.delete('/position/:uid', PositionController.delete);
+routes.delete('/positions/:uid', PositionController.delete);
 
 export default routes;

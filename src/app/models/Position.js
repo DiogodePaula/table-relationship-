@@ -14,26 +14,6 @@ class Position extends Model {
           allowNull: false,
           type: Sequelize.STRING,
         },
-        company_uid: {
-          type: Sequelize.UUID,
-          allowNull: false,
-          references: {
-            model: 'companies',
-            key: 'uid',
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
-        },
-        employee_uid: {
-          type: Sequelize.UUID,
-          allowNull: false,
-          references: {
-            model: 'employees',
-            key: 'uid',
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
-        },
       },
       {
         sequelize,
@@ -42,16 +22,16 @@ class Position extends Model {
     return this;
   }
 
-  static associate(models) {
-    this.belongsTo(models.Company, {
-      as: 'company',
-      foreignKey: 'company_uid',
-    });
-    this.hasMany(models.Employee, {
-      as: 'employee',
-      foreignKey: 'employee_uid',
-    });
-  }
+  // static associate(models) {
+  //   this.belongsTo(models.Company, {
+  //     as: 'company',
+  //     foreignKey: 'company_uid',
+  //   });
+  //   this.hasMany(models.Employee, {
+  //     as: 'employee',
+  //     foreignKey: 'employee_uid',
+  //   });
+  // }
 }
 
 export default Position;

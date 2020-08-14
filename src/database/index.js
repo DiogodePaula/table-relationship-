@@ -4,8 +4,9 @@ import databaseConfig from '../config/database';
 
 import Company from '../app/models/Company';
 import Employee from '../app/models/Employee';
+import Position from '../app/models/Position';
 
-const models = [Company, Employee];
+const models = [Company, Employee, Position];
 
 class DataBase {
   constructor() {
