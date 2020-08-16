@@ -1,4 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
+import Company from './Company';
 
 class Position extends Model {
   static init(sequelize) {
@@ -14,6 +15,16 @@ class Position extends Model {
           allowNull: false,
           type: Sequelize.STRING,
         },
+        employee_uid: {
+          type: Sequelize.UUID,
+          references: {
+            model: 'employees',
+            key: 'uid',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+          allowNull: false,
+        },
       },
       {
         sequelize,
@@ -22,16 +33,13 @@ class Position extends Model {
     return this;
   }
 
-  // static associate(models) {
-  //   this.belongsTo(models.Company, {
-  //     as: 'company',
-  //     foreignKey: 'company_uid',
-  //   });
-  //   this.hasMany(models.Employee, {
-  //     as: 'employee',
-  //     foreignKey: 'employee_uid',
-  //   });
-  // }
+  static associate(models) {
+    this.belongsToMany(Model.Employee, {
+      foreignKey: 'employee_uid',
+      through: 'positions',
+      as: 'employee',
+    });
+  }
 }
 
 export default Position;

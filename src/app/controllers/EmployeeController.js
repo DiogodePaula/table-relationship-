@@ -1,4 +1,5 @@
 import Employee from '../models/Employee';
+import Company from '../models/Company';
 
 class EmployeeController {
   async index(req, res) {
@@ -16,6 +17,11 @@ class EmployeeController {
       const { uid } = req.params;
       const employee = await Employee.findByPk(uid, {
         attributes: ['uid', 'name', 'age', 'cpf'],
+        include: {
+          model: Company,
+          as: 'company',
+          attributes: ['uid', 'name', 'branch', 'address'],
+        },
       });
 
       return res.json({ employee });

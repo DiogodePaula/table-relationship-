@@ -14,7 +14,9 @@ class CompanyController {
   async show(req, res) {
     try {
       const { uid } = req.params;
-      const company = await Company.findByPk(uid);
+      const company = await Company.findByPk(uid, {
+        attributes: ['uid', 'name', 'branch', 'address'],
+      });
 
       return res.json({ company });
     } catch (error) {

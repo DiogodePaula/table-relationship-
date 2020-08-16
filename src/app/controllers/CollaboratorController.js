@@ -1,6 +1,5 @@
 import Collaborator from '../models/Collaborator';
-import Company from '../models/Company';
-import Employee from '../models/Employee';
+import Position from '../models/Position';
 
 class CollaboratorController {
   async index(req, res) {
@@ -19,13 +18,8 @@ class CollaboratorController {
       const collaborator = await Collaborator.findByPk(uid, {
         attributes: ['uid'],
         include: {
-          model: Company,
-          as: 'company',
-          attributes: ['uid', 'name'],
-        },
-        include: {
-          model: Employee,
-          as: 'company',
+          model: Position,
+          as: 'position',
           attributes: ['uid', 'name'],
         },
       });

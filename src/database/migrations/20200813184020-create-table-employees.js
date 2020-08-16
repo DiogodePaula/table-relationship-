@@ -18,6 +18,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      company_uid: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'companies',
+          key: 'uid',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

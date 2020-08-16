@@ -6,26 +6,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID,
       },
-      company_uid: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'companies',
-          key: 'uid',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        allowNull: false,
-      },
-      employee_uid: {
-        type: Sequelize.UUID,
-        references: {
-          model: 'employees',
-          key: 'uid',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-        allowNull: false,
-      },
       position_uid: {
         type: Sequelize.UUID,
         references: {

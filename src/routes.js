@@ -4,6 +4,7 @@ import cors from 'cors';
 import CompanyController from './app/controllers/CompanyController';
 import EmployeeController from './app/controllers/EmployeeController';
 import PositionController from './app/controllers/PositionController';
+import CollaboratorController from './app/controllers/CollaboratorController';
 
 const routes = Router();
 routes.use(cors());
@@ -30,5 +31,12 @@ routes.get('/positions', PositionController.index);
 routes.get('/positions/:uid', PositionController.show);
 routes.put('/positions/:uid', PositionController.update);
 routes.delete('/positions/:uid', PositionController.delete);
+
+// COLLABORATORS ROUTES
+routes.post('/collaborators', CollaboratorController.store);
+routes.get('/collaborators', CollaboratorController.index);
+routes.get('/collaborators/:uid', CollaboratorController.show);
+routes.put('/collaborators/:uid', CollaboratorController.update);
+routes.delete('/collaborators/:uid', CollaboratorController.delete);
 
 export default routes;

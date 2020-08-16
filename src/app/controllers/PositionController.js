@@ -1,5 +1,4 @@
-// import Company from '../models/Company';
-// import Employee from '../models/Employee';
+import Employee from '../models/Employee';
 import Position from '../models/Position';
 
 class PositionController {
@@ -18,11 +17,11 @@ class PositionController {
       const { uid } = req.params;
       const position = await Position.findByPk(uid, {
         attributes: ['uid', 'name'],
-        // include: {
-        //   model: Company,
-        //   as: 'company',
-        //   attributes: ['uid', 'name', 'branch', 'address'],
-        // },
+        include: {
+          model: Employee,
+          as: 'employee',
+          attributes: ['uid', 'name', 'age', 'cpf'],
+        },
       });
 
       return res.json({ position });

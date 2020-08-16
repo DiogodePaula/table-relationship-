@@ -22,6 +22,16 @@ class Employee extends Model {
           allowNull: false,
           type: Sequelize.STRING,
         },
+        company_uid: {
+          type: Sequelize.UUID,
+          allowNull: false,
+          references: {
+            model: 'companies',
+            key: 'uid',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        },
       },
       {
         sequelize,
@@ -30,16 +40,12 @@ class Employee extends Model {
     return this;
   }
 
-  // static associate(models) {
-  //   this.belongsTo(models.Company, {
-  //     as: 'company',
-  //     foreignKey: 'company_uid',
-  //   });
-  //   this.hasMany(models.Position, {
-  //     as: 'position',
-  //     foreignKey: 'uid',
-  //   });
-  // }
+  static associate(models) {
+    this.belongsTo(models.Company, {
+      as: 'company',
+      foreignKey: 'company_uid',
+    });
+  }
 }
 
 export default Employee;
