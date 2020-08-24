@@ -1,15 +1,19 @@
-import { Router } from 'express';
+import {
+    Router
+} from 'express';
 import cors from 'cors';
 
 import CompanyController from './app/controllers/CompanyController';
 import EmployeeController from './app/controllers/EmployeeController';
-import PositionController from './app/controllers/PositionController';
-import CollaboratorController from './app/controllers/CollaboratorController';
+import RoleController from './app/controllers/RoleController';
+
 
 const routes = Router();
 routes.use(cors());
 
-routes.get('/', (req, res) => res.json({ result: 'BOMBANDO' }));
+routes.get('/', (req, res) => res.json({
+    result: 'BOMBANDO'
+}));
 
 // COMPANY ROUTES
 routes.post('/companies', CompanyController.store);
@@ -25,18 +29,13 @@ routes.get('/employees/:uid', EmployeeController.show);
 routes.put('/employees/:uid', EmployeeController.update);
 routes.delete('/employees/:uid', EmployeeController.delete);
 
-// POSITION ROUTES
-routes.post('/positions', PositionController.store);
-routes.get('/positions', PositionController.index);
-routes.get('/positions/:uid', PositionController.show);
-routes.put('/positions/:uid', PositionController.update);
-routes.delete('/positions/:uid', PositionController.delete);
+// ROLES ROUTES
+routes.post('/roles', RoleController.store);
+routes.get('/roles', RoleController.index);
+routes.get('/roles/:uid', RoleController.show);
+routes.put('/roles/:uid', RoleController.update);
+routes.delete('/roles/:uid', RoleController.delete);
 
-// COLLABORATORS ROUTES
-routes.post('/collaborators', CollaboratorController.store);
-routes.get('/collaborators', CollaboratorController.index);
-routes.get('/collaborators/:uid', CollaboratorController.show);
-routes.put('/collaborators/:uid', CollaboratorController.update);
-routes.delete('/collaborators/:uid', CollaboratorController.delete);
+
 
 export default routes;

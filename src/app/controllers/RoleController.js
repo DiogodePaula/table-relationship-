@@ -1,17 +1,25 @@
-import Employee from '../models/Employee';
+import Role from '../models/Role';
 import Company from '../models/Company';
 
-class EmployeeController {
+
+class RoleController {
   async index(req, res) {
     try {
-      const employee = await Employee.findAll();
+      const role = await Role.findAll({
+        attributes: ['uid', 'name'],
+        include: [{
+          model: Company,
+          as: 'company',
+          attributes: ['uid', 'name']
+        }]
+      });
 
       return res.json({
-        employee,
+        role
       });
     } catch (error) {
       return res.json({
-        error,
+        error
       });
     }
   }
@@ -19,36 +27,35 @@ class EmployeeController {
   async show(req, res) {
     try {
       const {
-        uid,
+        uid
       } = req.params;
-      const employee = await Employee.findByPk(uid, {
-        attributes: ['uid', 'name', 'age', 'cpf'],
+      const role = await Role.findByPk(uid, {
+        attributes: ['uid', 'name'],
         include: [{
-          // association: 'employees',
           model: Company,
           as: 'company',
-          attributes: ['uid', 'name', 'branch', 'address'],
-        }, ],
+          attributes: ['uid', 'name']
+        }]
       });
 
       return res.json({
-        employee,
+        role
       });
     } catch (error) {
       return res.json({
-        error,
+        error
       });
     }
   }
 
   async store(req, res) {
     try {
-      const employee = await Employee.create(req.body);
+      const role = await Role.create(req.body);
 
-      return res.json(employee);
+      return res.json(role);
     } catch (error) {
       return res.json({
-        error,
+        error
       });
     }
   }
@@ -56,12 +63,12 @@ class EmployeeController {
   async update(req, res) {
     try {
       const {
-        uid,
+        uid
       } = req.params;
-      const updated = await Employee.update(req.body, {
+      const updated = await Role.update(req.body, {
         where: {
-          uid,
-        },
+          uid
+        }
       });
 
       if (!updated) {
@@ -70,7 +77,7 @@ class EmployeeController {
       return res.json('DATA_UPDATE');
     } catch (error) {
       return res.json({
-        error,
+        error
       });
     }
   }
@@ -78,24 +85,24 @@ class EmployeeController {
   async delete(req, res) {
     try {
       const {
-        uid,
+        uid
       } = req.params;
 
-      const deleted = await Employee.destroy({
+      const deleted = await Role.destroy({
         where: {
-          uid,
-        },
+          uid
+        }
       });
 
       return res.json({
-        deleted,
+        deleted
       });
     } catch (error) {
       return res.json({
-        error,
+        error
       });
     }
   }
 }
 
-export default new EmployeeController();
+export default new RoleController();
