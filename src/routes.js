@@ -1,11 +1,13 @@
 import {
     Router
 } from 'express';
+
 import cors from 'cors';
 
 import CompanyController from './app/controllers/CompanyController';
 import EmployeeController from './app/controllers/EmployeeController';
 import RoleController from './app/controllers/RoleController';
+import UserController from './app/controllers/UserController';
 
 
 const routes = Router();
@@ -36,6 +38,11 @@ routes.get('/roles/:uid', RoleController.show);
 routes.put('/roles/:uid', RoleController.update);
 routes.delete('/roles/:uid', RoleController.delete);
 
+// ROUTES USER
+routes.post('/user', UserController.store);
+// routes.get('/user', UserController.index);
+// routes.get('/user/:uid', UserController.show);
+// routes.put('/user/:uid', UserController.update);
 
 
 export default routes;

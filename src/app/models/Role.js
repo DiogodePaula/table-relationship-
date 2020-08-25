@@ -36,6 +36,10 @@ class Role extends Model {
             as: 'company',
             foreignKey: 'company_uid',
         });
+        this.hasMany(models.EmployeeRole, {
+            as: 'employees',
+            foreignKey: 'role_uid',
+        });
     }
 }
 
