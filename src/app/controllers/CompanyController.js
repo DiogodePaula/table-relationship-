@@ -10,23 +10,22 @@ class CompanyController {
       });
 
       return res.json({
-        company
+        company,
       });
     } catch (error) {
       return res.json({
-        error
+        error,
       });
     }
   }
 
   async show(req, res) {
     try {
-      const {
-        uid
-      } = req.params;
+      const { uid } = req.params;
       const company = await Company.findByPk(uid, {
         attributes: ['uid', 'name', 'branch', 'address'],
-        include: [{
+        include: [
+          {
             model: Employee,
             as: 'employees',
             attributes: ['uid', 'name', 'age', 'cpf'],
@@ -34,17 +33,17 @@ class CompanyController {
           {
             model: Role,
             as: 'roles',
-            attributes: ['uid', 'name']
-          }
+            attributes: ['uid', 'name'],
+          },
         ],
       });
-      console.log(company.roles)
+      console.log(company.roles);
       return res.json({
-        company
+        company,
       });
     } catch (error) {
       return res.json({
-        error
+        error,
       });
     }
   }
@@ -54,7 +53,7 @@ class CompanyController {
       const company = await Company.create(req.body);
 
       return res.json({
-        company
+        company,
       });
     } catch (error) {
       const response = {
@@ -62,20 +61,18 @@ class CompanyController {
         error,
       };
       return res.json({
-        response
+        response,
       });
     }
   }
 
   async update(req, res) {
     try {
-      const {
-        uid
-      } = req.params;
+      const { uid } = req.params;
       const updated = await Company.update(req.body, {
         where: {
-          uid
-        }
+          uid,
+        },
       });
 
       if (!updated) {
@@ -84,31 +81,29 @@ class CompanyController {
       return res.json('DATA_UPDATE');
     } catch (error) {
       return res.json({
-        error
+        error,
       });
     }
   }
 
   async delete(req, res) {
     try {
-      const {
-        uid
-      } = req.params;
+      const { uid } = req.params;
       const deleted = await Company.destroy({
         where: {
-          uid
-        }
+          uid,
+        },
       });
       if (!deleted) {
         throw Error('Não encontrado');
       }
 
       return res.json({
-        deleted
+        deleted,
       });
     } catch (error) {
       return res.json({
-        error
+        error,
       });
     }
   }
