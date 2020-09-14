@@ -1,6 +1,4 @@
-import {
-    Router
-} from 'express';
+import { Router } from 'express';
 
 import cors from 'cors';
 
@@ -15,9 +13,11 @@ import authMiddleware from './app/controllers/middlewares/auth';
 const routes = Router();
 routes.use(cors());
 
-routes.get('/', (req, res) => res.json({
-    result: 'BOMBANDO'
-}));
+routes.get('/', (req, res) =>
+  res.json({
+    result: 'BOMBANDO',
+  })
+);
 
 // ROUTES USER
 routes.post('/users', UserController.store);
@@ -50,11 +50,8 @@ routes.get('/roles/:uid', RoleController.show);
 routes.put('/roles/:uid', RoleController.update);
 routes.delete('/roles/:uid', RoleController.delete);
 
-
 // routes.get('/user', UserController.index);
 // routes.get('/user/:uid', UserController.show);
 // routes.put('/user/:uid', UserController.update);
-
-
 
 export default routes;
